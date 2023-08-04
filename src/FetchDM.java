@@ -6,8 +6,7 @@ import java.util.List;
 import java.util.Properties;
 import java.util.stream.Collectors;
 
-public class TestConnection {
-
+public class FetchDM {
     public static Connection getConnection() throws SQLException, IOException {
         try {
             Class.forName("oracle.jdbc.OracleDriver");
@@ -29,7 +28,8 @@ public class TestConnection {
     public static void main(String[] args) {
         try {
             Connection connection = getConnection();
-            List<AssetDef> listAssetDef = new ArrayList<>();
+//            List<AssetDef> listAssetDef = new ArrayList<>();
+            List<TesEPM> listEPM = new ArrayList<>();
             if (connection != null) {
                 System.out.println("Connected to Oracle database!");
 
@@ -37,33 +37,31 @@ public class TestConnection {
                 Properties props = new Properties();
                 FileInputStream fis = new FileInputStream("prop_conf/db.properties");
                 props.load(fis);
-                String querySelect = props.getProperty("db.query");
+                String querySelect = props.getProperty("db.querySelect");
 
+                // Execute SELECT query
                 try (Statement statement = connection.createStatement();
                      ResultSet resultSet = statement.executeQuery(querySelect)) {
 
                     // Process query results
                     while (resultSet.next()) {
-                        AssetDef tesAssetDef = new AssetDef();
-                        tesAssetDef.setAssetID(resultSet.getString("asset_id"));
-                        tesAssetDef.setAsset_Name(resultSet.getString("asset_name"));
-                        tesAssetDef.setCurrency(resultSet.getString("currency"));
-                        tesAssetDef.setInst_Type(resultSet.getString("inst_type"));
-                        tesAssetDef.setTimeToMature(resultSet.getDouble("TIME_TO_MATURITY"));
-                        tesAssetDef.setPRICE(resultSet.getDouble("PRICE"));
-                        System.out.println(tesAssetDef.toString());
-                        listAssetDef.add(tesAssetDef);
+                        TesEPM tesEPM = new TesEPM();
+                        tesEPM.setBOOK(resultSet.getString("BOOK"));
+                        tesEPM.setISIN(resultSet.getString("ISIN"));
+                        tesEPM.setCLEAN_PRICE(resultSet.getString("CLEAN_PRICE"));
+                        System.out.println(tesEPM);
+                        listEPM.add(tesEPM);
                     }
 
                 }
                 connection.close();
             }
-            List<AssetDef> listPriceUn97 = new ArrayList<>();
-            listPriceUn97 = listAssetDef.stream().filter(p -> p.getPRICE()<96).collect(Collectors.toList());
-            for (AssetDef AssetU97:listPriceUn97
-                 ) {
-                System.out.println(AssetU97.toString());
-            }
+//            List<AssetDef> listPriceUn97 = new ArrayList<>();
+//            listPriceUn97 = listAssetDef.stream().filter(p -> p.getPRICE()<96).collect(Collectors.toList());
+//            for (AssetDef AssetU97:listPriceUn97
+//            ) {
+//                System.out.println(AssetU97.toString());
+//            }
 
 //            List<AssetDef> listAusBond = new ArrayList<>();
 //            listAusBond = listAssetDef.stream().filter(o -> o.getInst_Type().equals("Austrian Bond")).collect(Collectors.toList());

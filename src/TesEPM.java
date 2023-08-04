@@ -1,14 +1,8 @@
-public class TestEPM {
+public class TesEPM {
     String BOOK;
     String ISIN;
     String CLEAN_PRICE;
 
-
-    public TestEPM(String BOOK, String ISIN, String CLEAN_PRICE) {
-        this.BOOK = BOOK;
-        this.ISIN = ISIN;
-        this.CLEAN_PRICE = CLEAN_PRICE;
-    }
     public String getBOOK() {
         return BOOK;
     }
@@ -29,16 +23,16 @@ public class TestEPM {
         return CLEAN_PRICE;
     }
 
-    public void setCLEAN_PRICE(double CLEAN_PRICE) {
-        this.CLEAN_PRICE = String.valueOf(CLEAN_PRICE);
+    public void setCLEAN_PRICE(String CLEAN_PRICE) {
+        this.CLEAN_PRICE = CLEAN_PRICE;
     }
 
     @Override
     public String toString() {
-        return "TestEPM{" +
+        return "TesEPM{" +
                 "BOOK='" + BOOK + '\'' +
                 ", ISIN='" + ISIN + '\'' +
-                ", CLEAN_PRICE=" + CLEAN_PRICE +
+                ", CLEAN_PRICE='" + CLEAN_PRICE + '\'' +
                 '}';
     }
 }
