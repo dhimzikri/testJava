@@ -4,6 +4,7 @@ public class AssetDef {
     String Currency;
     String Inst_Type;
     double TimeToMature;
+    String GET_DATE;
     double PRICE;
 
     public String getAssetID() {
@@ -53,6 +54,15 @@ public class AssetDef {
     public void setPRICE(double PRICE) {
         this.PRICE = PRICE;
     }
+
+    public String getGET_DATE() {
+        return GET_DATE;
+    }
+
+    public void setGET_DATE(String GET_DATE) {
+        this.GET_DATE = GET_DATE;
+    }
+
     @Override
     public String toString() {
         return "AssetDef{" +
@@ -61,6 +71,7 @@ public class AssetDef {
                 ", Currency='" + Currency + '\'' +
                 ", Inst_Type='" + Inst_Type + '\'' +
                 ", TimeToMature=" + TimeToMature +
+                ", GET_DATE='" + GET_DATE + '\'' +
                 ", PRICE=" + PRICE +
                 '}';
     }

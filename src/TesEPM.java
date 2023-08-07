@@ -2,7 +2,15 @@ public class TesEPM {
     String BOOK;
     String ISIN;
     String CLEAN_PRICE;
+    String DATES;
 
+
+    public TesEPM(String Book, String ISIN, String CLEAN_PRICE, String DATES) {
+        this.BOOK = Book;
+        this.ISIN = ISIN;
+        this.CLEAN_PRICE = CLEAN_PRICE;
+        this.DATES = DATES;
+    }
     public String getBOOK() {
         return BOOK;
     }
@@ -27,12 +35,21 @@ public class TesEPM {
         this.CLEAN_PRICE = CLEAN_PRICE;
     }
 
+    public String getDATES() {
+        return DATES;
+    }
+
+    public void setDATES(String DATES) {
+        this.DATES = DATES;
+    }
+
     @Override
     public String toString() {
         return "TesEPM{" +
                 "BOOK='" + BOOK + '\'' +
                 ", ISIN='" + ISIN + '\'' +
                 ", CLEAN_PRICE='" + CLEAN_PRICE + '\'' +
+                ", DATES='" + DATES + '\'' +
                 '}';
     }
 }

@@ -6,24 +6,6 @@ import java.util.List;
 import java.util.Properties;
 
 public class ReadCSV {
-//    public static Connection getConnection() throws SQLException, IOException {
-//        try {
-//            Class.forName("oracle.jdbc.OracleDriver");
-//        } catch (ClassNotFoundException e) {
-//            throw new RuntimeException("Oracle JDBC Driver not found. Include it in the classpath.", e);
-//        }
-//
-//        Properties props = new Properties();
-//        FileInputStream fis = new FileInputStream("prop_conf/db.properties");
-//        props.load(fis);
-//
-//        String url = props.getProperty("urlDb.orc");
-//        String username = props.getProperty("userDb.orc");
-//        String password = props.getProperty("passDb.orc");
-//
-//        return DriverManager.getConnection(url, username, password);
-//    }
-
     public static void main(String[] args) {
         try {
             // Load properties from the file

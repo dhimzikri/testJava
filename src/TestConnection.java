@@ -8,27 +8,9 @@ import java.util.stream.Collectors;
 
 public class TestConnection {
 
-    public static Connection getConnection() throws SQLException, IOException {
-        try {
-            Class.forName("oracle.jdbc.OracleDriver");
-        } catch (ClassNotFoundException e) {
-            throw new RuntimeException("Oracle JDBC Driver not found. Include it in the classpath.", e);
-        }
-
-        Properties props = new Properties();
-        FileInputStream fis = new FileInputStream("prop_conf/db.properties");
-        props.load(fis);
-
-        String url = props.getProperty("urlDb.orc");
-        String username = props.getProperty("userDb.orc");
-        String password = props.getProperty("passDb.orc");
-
-        return DriverManager.getConnection(url, username, password);
-    }
-
     public static void main(String[] args) {
         try {
-            Connection connection = getConnection();
+            Connection connection = OracleDBConnection.getGlobalConnection();
             List<AssetDef> listAssetDef = new ArrayList<>();
             if (connection != null) {
                 System.out.println("Connected to Oracle database!");
@@ -50,6 +32,7 @@ public class TestConnection {
                         tesAssetDef.setCurrency(resultSet.getString("currency"));
                         tesAssetDef.setInst_Type(resultSet.getString("inst_type"));
                         tesAssetDef.setTimeToMature(resultSet.getDouble("TIME_TO_MATURITY"));
+                        tesAssetDef.setGET_DATE(resultSet.getString("get_date"));
                         tesAssetDef.setPRICE(resultSet.getDouble("PRICE"));
                         System.out.println(tesAssetDef.toString());
                         listAssetDef.add(tesAssetDef);
@@ -58,12 +41,12 @@ public class TestConnection {
                 }
                 connection.close();
             }
-            List<AssetDef> listPriceUn97 = new ArrayList<>();
-            listPriceUn97 = listAssetDef.stream().filter(p -> p.getPRICE()<96).collect(Collectors.toList());
-            for (AssetDef AssetU97:listPriceUn97
-                 ) {
-                System.out.println(AssetU97.toString());
-            }
+//            List<AssetDef> listPriceUn97 = new ArrayList<>();
+//            listPriceUn97 = listAssetDef.stream().filter(p -> p.getPRICE()<96).collect(Collectors.toList());
+//            for (AssetDef AssetU97:listPriceUn97
+//                 ) {
+//                System.out.println(AssetU97.toString());
+//            }
 
 //            List<AssetDef> listAusBond = new ArrayList<>();
 //            listAusBond = listAssetDef.stream().filter(o -> o.getInst_Type().equals("Austrian Bond")).collect(Collectors.toList());

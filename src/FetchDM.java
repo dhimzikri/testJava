@@ -4,29 +4,13 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
+import java.util.stream.Collectors;
 
 public class FetchDM {
-    public static Connection getConnection() throws SQLException, IOException {
-        try {
-            Class.forName("oracle.jdbc.OracleDriver");
-        } catch (ClassNotFoundException e) {
-            throw new RuntimeException("Oracle JDBC Driver not found. Include it in the classpath.", e);
-        }
-
-        Properties props = new Properties();
-        FileInputStream fis = new FileInputStream("prop_conf/db.properties");
-        props.load(fis);
-
-        String url = props.getProperty("urlDb.orc");
-        String username = props.getProperty("userDb.orc");
-        String password = props.getProperty("passDb.orc");
-
-        return DriverManager.getConnection(url, username, password);
-    }
 
     public static void main(String[] args) {
         try {
-            Connection connection = getConnection();
+            Connection connection = OracleDBConnection.getGlobalConnection();
 //            List<AssetDef> listAssetDef = new ArrayList<>();
             List<TesEPM> listEPM = new ArrayList<>();
             if (connection != null) {
@@ -44,10 +28,11 @@ public class FetchDM {
 
                     // Process query results
                     while (resultSet.next()) {
-                        TesEPM tesEPM = new TesEPM();
+                        TesEPM tesEPM = new TesEPM("", "", "","");
                         tesEPM.setBOOK(resultSet.getString("BOOK"));
                         tesEPM.setISIN(resultSet.getString("ISIN"));
                         tesEPM.setCLEAN_PRICE(resultSet.getString("CLEAN_PRICE"));
+//                        tesEPM.setDATES(resultSet.getString("DATES"));
                         System.out.println(tesEPM);
                         listEPM.add(tesEPM);
                     }
@@ -55,6 +40,14 @@ public class FetchDM {
                 }
                 connection.close();
             }
+
+//            List<TesEPM> listUn25 = new ArrayList<>();
+//            listUn25 = listUn25.stream().filter(p -> p.getDATES()).collect(Collectors.toList());
+//            for (TesEPM newList:listUn25
+//            ) {
+//                System.out.println(newList.toString());
+//            }
+
 //            List<AssetDef> listPriceUn97 = new ArrayList<>();
 //            listPriceUn97 = listAssetDef.stream().filter(p -> p.getPRICE()<96).collect(Collectors.toList());
 //            for (AssetDef AssetU97:listPriceUn97
