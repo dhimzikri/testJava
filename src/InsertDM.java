@@ -17,7 +17,6 @@ public class InsertDM {
                 Properties props = new Properties();
                 FileInputStream fis = new FileInputStream("prop_conf/db.properties");
                 props.load(fis);
-                String querySelect = props.getProperty("db.query");
 
                 // Sample data
                 ArrayList<TesEPM> dataRecords = new ArrayList<>();
@@ -30,7 +29,8 @@ public class InsertDM {
                 // SQL INSERT statement
                 String queryInsert = props.getProperty("db.queryInsert");
 
-                try (PreparedStatement ptms = connection.prepareStatement(queryInsert)) {
+                try (
+                        PreparedStatement ptms = connection.prepareStatement(queryInsert)) {
                     for (TesEPM record : dataRecords) {
                         ptms.setString(1, record.getBOOK());
                         ptms.setString(2, record.getISIN());

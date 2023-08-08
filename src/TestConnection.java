@@ -41,6 +41,7 @@ public class TestConnection {
                 }
                 connection.close();
             }
+
 //            List<AssetDef> listPriceUn97 = new ArrayList<>();
 //            listPriceUn97 = listAssetDef.stream().filter(p -> p.getPRICE()<96).collect(Collectors.toList());
 //            for (AssetDef AssetU97:listPriceUn97
@@ -49,7 +50,7 @@ public class TestConnection {
 //            }
 
 //            List<AssetDef> listAusBond = new ArrayList<>();
-//            listAusBond = listAssetDef.stream().filter(o -> o.getInst_Type().equals("Austrian Bond")).collect(Collectors.toList());
+//            listAusBond = listAssetDef.stream().filter(o -> o.getInst_Type().equals("Yankee Bond")).collect(Collectors.toList());
 //            for (AssetDef AusBon:listAusBond
 //                 ) {
 //                System.out.println(AusBon.toString());

@@ -1,6 +1,8 @@
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.sql.*;
+import java.text.ParseException;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
@@ -32,21 +34,14 @@ public class FetchDM {
                         tesEPM.setBOOK(resultSet.getString("BOOK"));
                         tesEPM.setISIN(resultSet.getString("ISIN"));
                         tesEPM.setCLEAN_PRICE(resultSet.getString("CLEAN_PRICE"));
-//                        tesEPM.setDATES(resultSet.getString("DATES"));
+                        tesEPM.setDATES(resultSet.getString("DATES"));
                         System.out.println(tesEPM);
                         listEPM.add(tesEPM);
                     }
-
                 }
                 connection.close();
             }
 
-//            List<TesEPM> listUn25 = new ArrayList<>();
-//            listUn25 = listUn25.stream().filter(p -> p.getDATES()).collect(Collectors.toList());
-//            for (TesEPM newList:listUn25
-//            ) {
-//                System.out.println(newList.toString());
-//            }
 
 //            List<AssetDef> listPriceUn97 = new ArrayList<>();
 //            listPriceUn97 = listAssetDef.stream().filter(p -> p.getPRICE()<96).collect(Collectors.toList());
