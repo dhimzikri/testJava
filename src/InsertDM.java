@@ -20,11 +20,11 @@ public class InsertDM {
 
                 // Sample data
                 ArrayList<TesEPM> dataRecords = new ArrayList<>();
-                dataRecords.add(new TesEPM("BondFN AL7707-MGFNAL7707/234M/05/01/2035/3.5%","US3132DMRB36", "92,743602", "2023-07-25"));
-                dataRecords.add(new TesEPM("BondFN AL7707-MGFNAL7707/234M/05/01/2035/3.5%","US3132DMRB36", "92,743602", "2023-07-26"));
-                dataRecords.add(new TesEPM("BondFN AL7707-MGFNAL7707/234M/05/01/2035/3.5%","US3132DMRB36", "92,743602", "2023-07-27"));
-                dataRecords.add(new TesEPM("BondFN AL7707-MGFNAL7707/234M/05/01/2035/3.5%","US3132DMRB36", "92,743602", "2023-07-28"));
-                dataRecords.add(new TesEPM("BondFN AL7707-MGFNAL7707/234M/05/01/2035/3.5%","US3132DMRB36", "92,743602", "2023-07-29"));
+                dataRecords.add(new TesEPM("TCW-USAGENCYMBS","US36179S5L78", "93,590235", "2023-06-05"));
+                dataRecords.add(new TesEPM("TCW-USAGENCYMBS","US36179R4E62", "93,70233", "2023-06-14"));
+                dataRecords.add(new TesEPM("TCW-USAGENCYMBS","US31418DHY13", "87,465861", "2023-06-25"));
+                dataRecords.add(new TesEPM("TCW-USAGENCYMBS","US36179SWY98", "95,928859", "2023-06-12"));
+                dataRecords.add(new TesEPM("TCW-USAGENCYMBS","US36179T7L33", "97,7624", "2023-06-09"));
 
                 // SQL INSERT statement
                 String queryInsert = props.getProperty("db.queryInsert");
