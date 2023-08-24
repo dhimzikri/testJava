@@ -1,7 +1,9 @@
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.Properties;
 
 public class TesEdit {
@@ -14,8 +16,8 @@ public class TesEdit {
                 fis.close();
 
                 // Select price from date and isin
-                String date = "2023-07-13"; // date
-                String isin = "US312932MW34"; // ISIN ID
+                String date = "2023-08-28"; // date
+                String isin = "US3137B2TG58"; // ISIN ID
                 // set Var Price
                 double price = 0.0;
 
@@ -50,8 +52,6 @@ public class TesEdit {
                 connection.close();
             } catch (SQLException e) {
                 e.printStackTrace();
-            } catch (FileNotFoundException e) {
-                throw new RuntimeException(e);
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }

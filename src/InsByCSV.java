@@ -1,36 +1,47 @@
 import java.io.BufferedReader;
+import java.io.FileInputStream;
 import java.io.FileReader;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.util.Properties;
 
 public class InsByCSV {
     public static void main(String[] args) {
         try {
             Connection connection = OracleDBConnection.getGlobalConnection();
-            String csvFilePath = "C:\\\\Users\\\\ptap2\\\\Downloads\\\\Book1.csv";
-            BufferedReader br = new BufferedReader(new FileReader(csvFilePath));
-            String line;
+            Properties props = new Properties();
+            FileInputStream fis = new FileInputStream("prop_conf/db.properties");
+            props.load(fis);
 
-            String insCSV = "INSERT INTO dm_tbl_test (BOOK, ISIN, CLEAN_PRICE, DATES) VALUES (?, ?, ?, ?)";
-            PreparedStatement ptms = connection.prepareStatement(insCSV);
-            br.readLine();
+            try {
+                String csvFilePath = props.getProperty("csvFilePath");
+                BufferedReader br = new BufferedReader(new FileReader(csvFilePath));
+                String line;
 
-            while ((line = br.readLine()) != null) {
-                String[] data = line.split(",");
-                ptms.setString(1, data[0]);
-                ptms.setString(2, data[1]);
-                ptms.setDouble(3, Double.parseDouble(data[2]));
-                ptms.setString(4, data[3]);
-                ptms.executeUpdate();
+                String insCSV = props.getProperty("insCSV");
+                PreparedStatement ptms = connection.prepareStatement(insCSV);
+                br.readLine();
+
+                while ((line = br.readLine()) != null) {
+                    String[] data = line.split(",");
+                    ptms.setString(1, data[0]);
+                    ptms.setString(2, data[1]);
+                    ptms.setDouble(3, Double.parseDouble(data[2]));
+                    ptms.setString(4, data[3]);
+                    ptms.executeUpdate();
+                }
+                br.close();
+                ptms.close();
+                connection.close();
+
+                System.out.println("Data inserted!");
+
+            } catch (Exception e) {
+                e.printStackTrace();
             }
-            br.close();
-            ptms.close();
-            connection.close();
-
-            System.out.println("Data inserted!");
-
         } catch (Exception e) {
-            e.printStackTrace();
+            throw new RuntimeException(e);
         }
+
     }
 }
