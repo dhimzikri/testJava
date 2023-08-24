@@ -24,10 +24,14 @@ public class InsByCSV {
 
                 while ((line = br.readLine()) != null) {
                     String[] data = line.split(",");
-                    ptms.setString(1, data[0]);
-                    ptms.setString(2, data[1]);
-                    ptms.setDouble(3, Double.parseDouble(data[2]));
-                    ptms.setString(4, data[3]);
+                    ptms.setString(1, data[0]); //position
+                    ptms.setString(2, data[1]); //book
+                    ptms.setString(3, data[2]); //ProductType
+                    ptms.setString(4, data[3]); //ProductSubType
+                    ptms.setString(5, data[4]); //ISIN
+                    ptms.setString(6, data[5]); //CUSIP
+                    ptms.setString(7, data[6]); //FIGI
+                    ptms.setDouble(8, Double.parseDouble(data[7]));//Clean_price
                     ptms.executeUpdate();
                 }
                 br.close();
