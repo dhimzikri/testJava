@@ -2,22 +2,24 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.sql.*;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Properties;
 
 public class TesEdit {
     public static void main(String[] args) {
             try {
                 Connection connection = OracleDBConnection.getGlobalConnection();
-                // Select price
-                String selPrice = "SELECT clean_price FROM DM_TBL_TEST WHERE dates = ? and isin = ?";
-                String date = "2023-08-05"; // date
-                String isin = "US3140L6SU92"; // ISIN ID
+                Properties props = new Properties();
+                FileInputStream fis = new FileInputStream("prop_conf/db.properties");
+                props.load(fis);
+                fis.close();
+
+                // Select price from date and isin
+                String date = "2023-07-13"; // date
+                String isin = "US312932MW34"; // ISIN ID
                 // set Var Price
                 double price = 0.0;
 
-                try (PreparedStatement statPrice = connection.prepareStatement(selPrice)) {
+                try (PreparedStatement statPrice = connection.prepareStatement(props.getProperty("db.selPrice"))) {
                     statPrice.setString(1, date);
                     statPrice.setString(2, isin);
                     try (ResultSet resultSet = statPrice.executeQuery()) {
@@ -34,8 +36,7 @@ public class TesEdit {
                 double newPrice = price + (0.1 * price); // Real price 85.433586
 
                 // Update the price
-                String updateQuery = "UPDATE DM_TBL_TEST SET clean_price = ? WHERE dates = ? and isin = ? ";
-                try (PreparedStatement updateStatement = connection.prepareStatement(updateQuery)) {
+                try (PreparedStatement updateStatement = connection.prepareStatement(props.getProperty("db.updPrice"))) {
                     updateStatement.setDouble(1, newPrice);
                     updateStatement.setString(2, date);
                     updateStatement.setString(3, isin);
@@ -49,6 +50,10 @@ public class TesEdit {
                 connection.close();
             } catch (SQLException e) {
                 e.printStackTrace();
+            } catch (FileNotFoundException e) {
+                throw new RuntimeException(e);
+            } catch (IOException e) {
+                throw new RuntimeException(e);
             }
-        }
+    }
 }
