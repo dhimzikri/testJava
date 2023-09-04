@@ -30,12 +30,16 @@ public class FetchDM {
 
                     // Process query results
                     while (resultSet.next()) {
-                        TesEPM tesEPM = new TesEPM("", "", "","");
+                        TesEPM tesEPM = new TesEPM("TCW-USAGENCYMBS", "US36179S5L78", "93,590235", "2023-06-05");
+                        tesEPM.setPOSITIONS(resultSet.getString("POSITIONS"));
                         tesEPM.setBOOK(resultSet.getString("BOOK"));
                         tesEPM.setISIN(resultSet.getString("ISIN"));
-                        tesEPM.setCLEAN_PRICE(resultSet.getString("CLEAN_PRICE"));
-                        tesEPM.setDATES(resultSet.getString("DATES"));
-                        System.out.println(tesEPM);
+                        tesEPM.setPRODUCT_TYPE(resultSet.getString("PRODUCT_TYPE"));
+                        tesEPM.setPRODUCT_SUBTYPE(resultSet.getString("PRODUCT_SUBTYPE"));
+                        tesEPM.setCUSIP(resultSet.getString("CUSIP"));
+                        tesEPM.setFIGI(resultSet.getString("FIGI"));
+                        tesEPM.setCLEAN_PRICE(resultSet.getDouble("CLEAN_PRICE"));
+                        System.out.println(tesEPM.toString());
                         listEPM.add(tesEPM);
                     }
                 }

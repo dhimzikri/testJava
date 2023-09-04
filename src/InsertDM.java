@@ -4,14 +4,14 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.List;
+//import java.util.List;
 import java.util.Properties;
 
 public class InsertDM {
     public static void main(String[] args) {
         try {
             Connection connection = OracleDBConnection.getGlobalConnection();
-            List<AssetDef> listAssetDef = new ArrayList<>();
+//            List<AssetDef> listAssetDef = new ArrayList<>();
             if (connection != null) {
                 System.out.println("Connected to Oracle database!");
 
@@ -37,7 +37,7 @@ public class InsertDM {
                         ptms.setString(1, record.getBOOK());
                         ptms.setString(2, record.getISIN());
                         ptms.setString(3, String.valueOf(record.getCLEAN_PRICE()));
-                        ptms.setString(4, record.getDATES());
+//                        ptms.setString(4, record.getDATES());
                         ptms.executeUpdate();
                     }
                     ptms.close();
