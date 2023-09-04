@@ -14,7 +14,7 @@ public class FetchDM {
         try {
             Connection connection = OracleDBConnection.getGlobalConnection();
 //            List<AssetDef> listAssetDef = new ArrayList<>();
-            List<TesEPM> listEPM = new ArrayList<>();
+            List<AttrFetchDM> listEPM = new ArrayList<>();
             if (connection != null) {
                 System.out.println("Connected to Oracle database!");
 
@@ -30,17 +30,17 @@ public class FetchDM {
 
                     // Process query results
                     while (resultSet.next()) {
-                        TesEPM tesEPM = new TesEPM("TCW-USAGENCYMBS", "US36179S5L78", "93,590235", "2023-06-05");
-                        tesEPM.setPOSITIONS(resultSet.getString("POSITIONS"));
-                        tesEPM.setBOOK(resultSet.getString("BOOK"));
-                        tesEPM.setISIN(resultSet.getString("ISIN"));
-                        tesEPM.setPRODUCT_TYPE(resultSet.getString("PRODUCT_TYPE"));
-                        tesEPM.setPRODUCT_SUBTYPE(resultSet.getString("PRODUCT_SUBTYPE"));
-                        tesEPM.setCUSIP(resultSet.getString("CUSIP"));
-                        tesEPM.setFIGI(resultSet.getString("FIGI"));
-                        tesEPM.setCLEAN_PRICE(resultSet.getDouble("CLEAN_PRICE"));
-                        System.out.println(tesEPM.toString());
-                        listEPM.add(tesEPM);
+                        AttrFetchDM attrFetchDM = new AttrFetchDM();
+                        attrFetchDM.setPOSITIONS(resultSet.getString("POSITIONS"));
+                        attrFetchDM.setBOOK(resultSet.getString("BOOK"));
+                        attrFetchDM.setISIN(resultSet.getString("ISIN"));
+                        attrFetchDM.setPRODUCT_TYPE(resultSet.getString("PRODUCT_TYPE"));
+                        attrFetchDM.setPRODUCT_SUBTYPE(resultSet.getString("PRODUCT_SUBTYPE"));
+                        attrFetchDM.setCUSIP(resultSet.getString("CUSIP"));
+                        attrFetchDM.setFIGI(resultSet.getString("FIGI"));
+                        attrFetchDM.setCLEAN_PRICE(resultSet.getDouble("CLEAN_PRICE"));
+                        System.out.println(attrFetchDM.toString());
+                        listEPM.add(attrFetchDM);
                     }
                 }
                 connection.close();

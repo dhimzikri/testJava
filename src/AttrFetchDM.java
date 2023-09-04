@@ -1,4 +1,4 @@
-public class TesEPM {
+public class AttrFetchDM {
    String POSITIONS;
    String BOOK;
    String PRODUCT_TYPE;
@@ -8,7 +8,7 @@ public class TesEPM {
    String FIGI;
    double CLEAN_PRICE;
 
-   public TesEPM(String s, String us36179S5L78, String string, String date) {
+   public AttrFetchDM() {
       this.POSITIONS = POSITIONS;
       this.BOOK = BOOK;
       this.ISIN = ISIN;
@@ -19,6 +19,7 @@ public class TesEPM {
       this.CLEAN_PRICE = CLEAN_PRICE;
 //      this.DATES = DATES;
    }
+
    public String getPOSITIONS() {
       return POSITIONS;
    }
@@ -85,7 +86,7 @@ public class TesEPM {
 
    @Override
    public String toString() {
-      return "TesEPM{" +
+      return "AttrFetchDM{" +
               "POSITIONS='" + POSITIONS + '\'' +
               ", BOOK='" + BOOK + '\'' +
               ", PRODUCT_TYPE='" + PRODUCT_TYPE + '\'' +

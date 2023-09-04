@@ -16,18 +16,18 @@ public class InstByDate {
             FileInputStream fis = new FileInputStream("prop_conf/db.properties");
             props.load(fis);
 
-            ArrayList<TesEPM> dataRecords = new ArrayList<>();
-            dataRecords.add(new TesEPM("TesDate", "DateNow", "92,743602", ""));
-//            dataRecords.add(new TesEPM("BondFN AL7707-MGFNAL7707/234M/05/01/2035/3.5%", "US3132DMRB36", "92,743602", "2023-07-26"));
-//            dataRecords.add(new TesEPM("BondFN AL7707-MGFNAL7707/234M/05/01/2035/3.5%", "US3132DMRB36", "92,743602", "2023-07-27"));
-//            dataRecords.add(new TesEPM("BondFN AL7707-MGFNAL7707/234M/05/01/2035/3.5%", "US3132DMRB36", "92,743602", "2023-07-28"));
-//            dataRecords.add(new TesEPM("BondFN AL7707-MGFNAL7707/234M/05/01/2035/3.5%", "US3132DMRB36", "92,743602", "2023-07-29"));
+            ArrayList<AttrFetchDM> dataRecords = new ArrayList<>();
+//            dataRecords.add(new AttrFetchDM("TesDate", "DateNow", "92,743602", ""));
+//            dataRecords.add(new AttrFetchDM("BondFN AL7707-MGFNAL7707/234M/05/01/2035/3.5%", "US3132DMRB36", "92,743602", "2023-07-26"));
+//            dataRecords.add(new AttrFetchDM("BondFN AL7707-MGFNAL7707/234M/05/01/2035/3.5%", "US3132DMRB36", "92,743602", "2023-07-27"));
+//            dataRecords.add(new AttrFetchDM("BondFN AL7707-MGFNAL7707/234M/05/01/2035/3.5%", "US3132DMRB36", "92,743602", "2023-07-28"));
+//            dataRecords.add(new AttrFetchDM("BondFN AL7707-MGFNAL7707/234M/05/01/2035/3.5%", "US3132DMRB36", "92,743602", "2023-07-29"));
 
             String insert = props.getProperty("db.queryInsert");
             LocalDate currentDate = LocalDate.now();
             try (
                     PreparedStatement ptms = connection.prepareStatement(insert)) {
-                for (TesEPM record : dataRecords) {
+                for (AttrFetchDM record : dataRecords) {
                     ptms.setString(1, record.getBOOK());
                     ptms.setString(2, record.getISIN());
                     ptms.setString(3, String.valueOf(record.getCLEAN_PRICE()));
